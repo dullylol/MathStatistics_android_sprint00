@@ -1,12 +1,11 @@
-package com.asustuf.myapplication
+package com.asustuf.sprint00
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.asustuf.myapplication.databinding.ActivityMainBinding
-import com.asustuf.myapplication.samples.SamplesAdapter
+import com.asustuf.sprint00.databinding.ActivityMainBinding
+import com.asustuf.sprint00.samples.SamplesAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding

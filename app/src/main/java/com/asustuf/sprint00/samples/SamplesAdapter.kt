@@ -1,11 +1,11 @@
-package com.asustuf.myapplication.samples
+package com.asustuf.sprint00.samples
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
-import com.asustuf.myapplication.databinding.SampleBinding
+import com.asustuf.sprint00.databinding.SampleBinding
 
 class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :
     RecyclerView.Adapter<SamplesAdapter.SampleViewHolder>() {

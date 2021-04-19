@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Sprint00</string>
     <string name="title_tv">Sprint00</string>
     <string name="task1_btn">Task1</string>
     <string name="task2_btn">Task2</string>
     <string name="task3_btn">Task3</string>
     <string name="task4_btn">Task4</string>
     <string name="task5_btn">Task5</string>
-    <string name="count_of_samples_hint">Count of samples</string>
     <string name="your_sample">Your sample</string>
     <string name="add_sample_btn">Add sample</string>
     <string name="remove_sample_btn">Remove sample</string>

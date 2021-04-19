@@ -1,4 +1,4 @@
-package com.asustuf.myapplication
+package com.asustuf.sprint00
 
 import org.junit.Test
 
