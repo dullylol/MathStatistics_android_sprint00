@@ -24,44 +24,55 @@
             android:textStyle="bold"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/task1_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task1_btn" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/task2_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task2_btn" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/task3_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task3_btn" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/task4_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task4_btn" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/task5_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task5_btn" />
 
-        <EditText
-            android:id="@+id/samples_count_tv"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/count_of_samples_hint"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:inputType="number"
-            android:width="160dp"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/add_sample_btn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="20dp"
+                android:background="@android:drawable/ic_input_add" />
+
+            <Button
+                android:id="@+id/remove_sample_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:background="@android:drawable/ic_delete" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/samples_rv"

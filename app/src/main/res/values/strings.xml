@@ -8,4 +8,6 @@
     <string name="task5_btn">Task5</string>
     <string name="count_of_samples_hint">Count of samples</string>
     <string name="your_sample">Your sample</string>
+    <string name="add_sample_btn">Add sample</string>
+    <string name="remove_sample_btn">Remove sample</string>
 </resources>

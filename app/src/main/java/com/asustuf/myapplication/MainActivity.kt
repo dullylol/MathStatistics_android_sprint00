@@ -2,6 +2,7 @@ package com.asustuf.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.asustuf.myapplication.databinding.ActivityMainBinding
@@ -15,7 +16,30 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
 
+        val adapter = SamplesAdapter(this)
+
         mainBinding.samplesRv.layoutManager = LinearLayoutManager(this)
-        mainBinding.samplesRv.adapter = SamplesAdapter(this, 5)
+        mainBinding.samplesRv.adapter = adapter
+
+        mainBinding.addSampleBtn.setOnClickListener {
+            if (adapter.itemCount < 26) {
+                adapter.addSample()
+                adapter.notifyDataSetChanged()
+            } else {
+                Toast.makeText(this, "Maximum count of samples is 26", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
+        mainBinding.removeSampleBtn.setOnClickListener {
+            if (adapter.itemCount > 2) {
+                adapter.removeSample()
+                adapter.notifyDataSetChanged()
+            } else {
+                Toast.makeText(this, "Minimum count of samples is 2", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
     }
 }
