@@ -40,5 +40,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        mainBinding.defaultSamplesBtn.setOnClickListener {
+            adapter.setDefaultSamples()
+            adapter.notifyDataSetChanged()
+        }
+
+        mainBinding.cleanSamplesBtn.setOnClickListener {
+            adapter.cleanSamples()
+            adapter.notifyDataSetChanged()
+        }
+
+        mainBinding.task1Btn.setOnClickListener {
+            //TODO do task
+        }
+
+        mainBinding.task2Btn.setOnClickListener {
+            //TODO do task
+        }
+
+        mainBinding.task3Btn.setOnClickListener {
+            //TODO do task
+        }
+
+        mainBinding.task4Btn.setOnClickListener {
+            //TODO do task
+        }
+
+        mainBinding.task5Btn.setOnClickListener {
+            //TODO do task
+        }
+
     }
 }

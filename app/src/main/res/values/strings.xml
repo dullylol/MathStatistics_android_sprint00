@@ -9,4 +9,6 @@
     <string name="your_sample">Your sample</string>
     <string name="add_sample_btn">Add sample</string>
     <string name="remove_sample_btn">Remove sample</string>
+    <string name="set_default">Set default</string>
+    <string name="clean_btn">Clean</string>
 </resources>
