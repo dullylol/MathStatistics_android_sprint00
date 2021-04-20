@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
+import com.asustuf.sprint00.databinding.SampleRvBinding
 import com.asustuf.sprint00.utils.Alphabet.Companion.samplesNames
-import com.asustuf.sprint00.databinding.SampleBinding
 import java.lang.NumberFormatException
 
 class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :
@@ -89,7 +89,7 @@ class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SampleViewHolder {
         val sampleBinding =
-            SampleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            SampleRvBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SampleViewHolder(sampleBinding)
     }
 
@@ -105,7 +105,7 @@ class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :
         return samples.size
     }
 
-    class SampleViewHolder(private val sample: SampleBinding) :
+    class SampleViewHolder(private val sample: SampleRvBinding) :
         RecyclerView.ViewHolder(sample.root) {
         fun bind(sampleName: Char, sampleNumbers: EditText) {
             sample.sampleNumbers.text = sampleNumbers.text
