@@ -1,23 +1,21 @@
-package com.asustuf.sprint00.samples
+package com.asustuf.sprint00.main.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.method.DigitsKeyListener
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
+import com.asustuf.sprint00.utils.Alphabet.Companion.samplesNames
 import com.asustuf.sprint00.databinding.SampleBinding
+import java.lang.NumberFormatException
 
 class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :
     RecyclerView.Adapter<SamplesAdapter.SampleViewHolder>() {
 
-    private val samplesNames = arrayOf(
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-    )
-    private var samples = ArrayList<EditText>(samplesNames.size)
+
+    private var samples = mutableListOf<EditText>()
 
     init {
         val newSamplesCount = if (samplesCount in 2..26) {
@@ -29,6 +27,30 @@ class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :
         for (i in 0 until newSamplesCount) {
             samples.add(EditText(context))
         }
+    }
+
+    fun getSample(sampleName: Char): MutableList<Double> {
+        val index = samplesNames.indexOf(sampleName)
+        val strSample = if (index != -1 && samples.size > index) {
+            samples[index].text.toString()
+        } else { "" }
+
+        val fixedStrSample = "\\s".toRegex().split(strSample.trim())
+        val sample = mutableListOf<Double>()
+
+        if (fixedStrSample.isEmpty()) {
+            return mutableListOf()
+        }
+
+        try {
+            fixedStrSample.forEach {
+                sample.add(it.toDouble())
+            }
+        } catch (e: NumberFormatException) {
+            sample.add(0.0)
+        }
+
+        return sample
     }
 
     fun addSample() {
@@ -60,8 +82,8 @@ class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :
     }
 
     fun cleanSamples() {
-        for (element in samples) {
-            element.setText("")
+        for (i in samples.indices) {
+            samples[i].setText("")
         }
     }
 
@@ -88,6 +110,10 @@ class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :
         fun bind(sampleName: Char, sampleNumbers: EditText) {
             sample.sampleNumbers.text = sampleNumbers.text
             sample.sampleName.text = "$sampleName:"
+
+            sample.sampleNumbers.addTextChangedListener {
+                sampleNumbers.text = it
+            }
         }
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
     <LinearLayout
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="@string/title_tv"
             android:layout_gravity="center"
-            android:textSize="28sp"
+            android:textSize="26sp"
             android:textStyle="bold"/>
 
         <Button

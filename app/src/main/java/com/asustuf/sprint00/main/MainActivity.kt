@@ -1,11 +1,14 @@
-package com.asustuf.sprint00
+package com.asustuf.sprint00.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asustuf.sprint00.databinding.ActivityMainBinding
-import com.asustuf.sprint00.samples.SamplesAdapter
+import com.asustuf.sprint00.main.adapters.SamplesAdapter
+import com.asustuf.sprint00.task1.Task1Activity
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
@@ -51,7 +54,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainBinding.task1Btn.setOnClickListener {
-            //TODO do task
+            val sampleA = adapter.getSample('A')
+            val sampleB = adapter.getSample('B')
+
+            val samples = mutableListOf<MutableList<Double>>()
+            samples.add(sampleA)
+            samples.add(sampleB)
+
+            val intent = Intent(this, Task1Activity::class.java)
+            intent.putExtra("samples", samples as Serializable)
+            startActivity(intent)
+            //TODO add to recycler checkboxes and push in it a lot of samples (not only A and B)
         }
 
         mainBinding.task2Btn.setOnClickListener {
