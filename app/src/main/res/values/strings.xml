@@ -11,4 +11,7 @@
     <string name="remove_sample_btn">Remove sample</string>
     <string name="set_default">Set default</string>
     <string name="clean_btn">Clean</string>
+    <string name="cumulative_frequency_text">Cumulative frequency:</string>
+    <string name="relative_frequency_text">Relative frequency:</string>
+    <string name="cumulative_relative_frequency_text">Cumulative relative frequency:</string>
 </resources>

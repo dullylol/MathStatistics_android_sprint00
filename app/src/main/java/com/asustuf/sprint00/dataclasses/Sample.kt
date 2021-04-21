@@ -1,4 +1,4 @@
-package com.asustuf.sprint00.utils
+package com.asustuf.sprint00.dataclasses
 
 import java.io.Serializable
 

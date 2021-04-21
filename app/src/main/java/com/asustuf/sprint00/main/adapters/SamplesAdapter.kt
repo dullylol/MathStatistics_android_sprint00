@@ -9,9 +9,9 @@ import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.asustuf.sprint00.databinding.SampleRvBinding
-import com.asustuf.sprint00.utils.Alphabet.Companion.samplesNames
-import com.asustuf.sprint00.utils.Sample
-import com.asustuf.sprint00.utils.SampleBox
+import com.asustuf.sprint00.dataclasses.Alphabet.Companion.samplesNames
+import com.asustuf.sprint00.dataclasses.Sample
+import com.asustuf.sprint00.dataclasses.SampleBox
 import java.lang.NumberFormatException
 
 class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :
@@ -40,7 +40,7 @@ class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :
                 val strSample = sample.numbers.text.toString()
 
                 if (strSample.replace(" ", "") != "") {
-                    val fixedStrSample = "\\s".toRegex().split(strSample.trim())
+                    val fixedStrSample = "\\s+".toRegex().split(strSample.trim())
                     val tempSample = mutableListOf<Double>()
 
                     try {
