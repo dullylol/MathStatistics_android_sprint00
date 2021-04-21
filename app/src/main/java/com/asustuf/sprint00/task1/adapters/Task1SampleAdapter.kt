@@ -3,13 +3,12 @@ package com.asustuf.sprint00.task1.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.asustuf.sprint00.utils.Alphabet
 import com.asustuf.sprint00.databinding.Task1ForSampleRvBinding
+import com.asustuf.sprint00.utils.Sample
 
-class Task1SampleAdapter(private val samples: MutableList<MutableList<Double>>) :
+class Task1SampleAdapter(private val samples: MutableList<Sample>) :
     RecyclerView.Adapter<Task1SampleAdapter.Task1SampleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Task1SampleViewHolder {
@@ -20,7 +19,7 @@ class Task1SampleAdapter(private val samples: MutableList<MutableList<Double>>) 
     }
 
     override fun onBindViewHolder(holder: Task1SampleViewHolder, position: Int) {
-        holder.bind(samples[position], position)
+        holder.bind(samples[position])
     }
 
     override fun getItemCount(): Int {
@@ -30,12 +29,13 @@ class Task1SampleAdapter(private val samples: MutableList<MutableList<Double>>) 
     class Task1SampleViewHolder(private val binding: Task1ForSampleRvBinding, private val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(sample: MutableList<Double>, index: Int) {
-            binding.sampleName.text = Alphabet.samplesNames[index].toString()
-            
+        fun bind(sample: Sample) {
+            binding.sampleName.text = sample.sampleName
             binding.variationRowRv.layoutManager =
                 LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-            binding.variationRowRv.adapter = VariationRowAdapter(sample)
+
+
+            binding.variationRowRv.adapter = VariationRowAdapter(sample.sampleNumbers)
         }
     }
 }

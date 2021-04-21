@@ -54,17 +54,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainBinding.task1Btn.setOnClickListener {
-            val sampleA = adapter.getSample('A')
-            val sampleB = adapter.getSample('B')
+            val checkedSamples = adapter.getCheckedSamples()
 
-            val samples = mutableListOf<MutableList<Double>>()
-            samples.add(sampleA)
-            samples.add(sampleB)
+            if (checkedSamples.isEmpty()) {
+                Toast.makeText(this, "Samples are empty!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val intent = Intent(this, Task1Activity::class.java)
-            intent.putExtra("samples", samples as Serializable)
+            intent.putExtra("samples", checkedSamples as Serializable)
             startActivity(intent)
-            //TODO add to recycler checkboxes and push in it a lot of samples (not only A and B)
         }
 
         mainBinding.task2Btn.setOnClickListener {

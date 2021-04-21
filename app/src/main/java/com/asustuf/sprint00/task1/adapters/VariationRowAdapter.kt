@@ -8,11 +8,7 @@ import com.asustuf.sprint00.databinding.VariarionRowRvBinding
 class VariationRowAdapter(private val sample: MutableList<Double>) :
     RecyclerView.Adapter<VariationRowAdapter.VariationRowHolder>() {
 
-    private val sampleSet = sample.toSet()
-
-    init {
-        sample.sort()
-    }
+    private val sampleSet = sample.toSortedSet()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VariationRowHolder {
         val binding =
