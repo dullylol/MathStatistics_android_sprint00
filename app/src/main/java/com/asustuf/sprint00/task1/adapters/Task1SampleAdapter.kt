@@ -42,7 +42,7 @@ class Task1SampleAdapter(private val samples: MutableList<Sample>) :
                 LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             binding.variationRowRv.adapter = VariationRowAdapter(sample.sampleNumbers)
 
-            binding.sampleSpan.text = "Sample span: " +sampleOperations.getSpan()
+            binding.sampleSpan.text = "Sample span: " +sampleOperations.span
 
             // Imaging recyclers
             binding.cumulativeFrequencyRv.layoutManager =

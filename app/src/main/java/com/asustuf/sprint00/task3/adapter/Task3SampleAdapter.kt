@@ -33,11 +33,19 @@ class Task3SampleAdapter(private val samples: MutableList<Sample>) :
             val sampleOperations = SampleOperations(sample.sampleNumbers.toTypedArray())
 
             binding.sampleName.text = sample.sampleName
-            binding.sampleAverage.text = "Sample average: ${sampleOperations.getVariationRow().average()}"
-            binding.median.text = "Median: ${sampleOperations.getMedian()}"
-            binding.moda.text = "Moda: ${sampleOperations.getModa()}"
-
-
+            binding.sampleAverage.text = "Sample average: ${sampleOperations.sampleAverage}"
+            binding.median.text = "Median: ${sampleOperations.median}"
+            binding.moda.text = "Moda: ${sampleOperations.moda}"
+            binding.selectiveVariance.text =
+                "Selective variance: ${sampleOperations.selectiveVariance}"
+            binding.sampleStandardDeviation.text =
+                "Sample standard deviation: ${sampleOperations.sampleStandardDeviation}"
+            binding.coefficientOfVariation.text =
+                "Coefficient of variation: ${sampleOperations.coefficientOfVariation * 100}%"
+            binding.centralMoment3.text = "Central moment(3): ${sampleOperations.centralMoment3}"
+            binding.centralMoment4.text = "Central moment(4): ${sampleOperations.centralMoment4}"
+            binding.asymmetry.text = "Asymmetry: ${sampleOperations.asymmetry}"
+            binding.excess.text = "Excess: ${sampleOperations.excess}"
         }
     }
 }
