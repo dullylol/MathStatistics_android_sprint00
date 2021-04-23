@@ -1,10 +1,12 @@
-package com.asustuf.sprint00.task2.adapters
+ package com.asustuf.sprint00.task2.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.asustuf.sprint00.databinding.Task2ForSampleRvBinding
-import com.asustuf.sprint00.dataclasses.Sample
+import com.asustuf.sprint00.model.dataclasses.Sample
+import com.asustuf.sprint00.model.SampleOperations
 import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
@@ -30,22 +32,14 @@ class Task2SampleAdapter(private val samples: MutableList<Sample>) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(sample: Sample) {
-            val numbers = sample.sampleNumbers
-            val numbersSet = numbers.toSortedSet()
-            val countsList = mutableListOf<Double>()
-
-            numbersSet.forEach { numberOfSet ->
-                var count = 0.0
-                numbers.forEach { numberOfArray ->
-                    if (numberOfSet.equals(numberOfArray)) {
-                        count++
-                    }
-                }
-                countsList.add(count)
-            }
+            val sampleOperations = SampleOperations(sample.sampleNumbers.toTypedArray())
+            val numbersSet = sampleOperations.getNumbersSortedSet()
+            val countsList = sampleOperations.getCountsList()
 
             // Line graph
-            val lineGraphSeries = LineGraphSeries<DataPoint>().apply { this.isDrawDataPoints = true }
+            val lineGraphSeries = LineGraphSeries<DataPoint>().apply {
+                this.isDrawDataPoints = true
+            }
             for (i in numbersSet.indices) {
                 lineGraphSeries.appendData(DataPoint(numbersSet.elementAt(i), countsList[i]),
                     true, numbersSet.size, false)
@@ -53,11 +47,14 @@ class Task2SampleAdapter(private val samples: MutableList<Sample>) :
             binding.lineGraph.addSeries(lineGraphSeries)
             binding.lineGraph.title = "Polygon " + sample.sampleName
             binding.lineGraph.titleTextSize = 38F
-            binding.lineGraph.viewport.isYAxisBoundsManual = true
-            binding.lineGraph.viewport.isXAxisBoundsManual = true
+            binding.lineGraph.viewport.isScalable = true
+            binding.lineGraph.setBackgroundColor(Color.rgb(10, 20, 100))
 
             // Bar graph
-            val barGraphSeries = BarGraphSeries<DataPoint>()
+            val barGraphSeries = BarGraphSeries<DataPoint>().apply {
+                this.isDrawValuesOnTop = true
+                this.valuesOnTopColor = Color.YELLOW
+            }
             for (i in numbersSet.indices) {
                 barGraphSeries.appendData(DataPoint(numbersSet.elementAt(i), countsList[i]),
                     true, numbersSet.size + 10, false)
@@ -65,24 +62,26 @@ class Task2SampleAdapter(private val samples: MutableList<Sample>) :
             binding.barGraph.addSeries(barGraphSeries)
             binding.barGraph.title = "Histogram " + sample.sampleName
             binding.barGraph.titleTextSize = 38F
-            binding.barGraph.viewport.isYAxisBoundsManual = true
-            binding.barGraph.viewport.isXAxisBoundsManual = true
+            binding.barGraph.viewport.isScalable = true
+            binding.barGraph.setBackgroundColor(Color.rgb(10, 20, 100))
 
             // Graph empirical function
             val empiricGraphSeries = LineGraphSeries<DataPoint>().apply { this.isDrawDataPoints = true }
             var count = countsList[0]
-            empiricGraphSeries.appendData(DataPoint(numbersSet.elementAt(0), count / numbers.size),
+            empiricGraphSeries.appendData(DataPoint(numbersSet.elementAt(0),
+                count / sampleOperations.getNumbers().size),
                 true, numbersSet.size, false)
             for (i in 1 until numbersSet.size) {
                 count += countsList[i]
-                empiricGraphSeries.appendData(DataPoint(numbersSet.elementAt(i), count / numbers.size),
+                empiricGraphSeries.appendData(DataPoint(numbersSet.elementAt(i),
+                    count / sampleOperations.getNumbers().size),
                     true, numbersSet.size, false)
             }
             binding.empiricGraph.addSeries(empiricGraphSeries)
             binding.empiricGraph.title = "Empirical graph " + sample.sampleName
             binding.empiricGraph.titleTextSize = 38F
-            binding.empiricGraph.viewport.isYAxisBoundsManual = true
-            binding.empiricGraph.viewport.isXAxisBoundsManual = true
+            binding.empiricGraph.viewport.isScalable = true
+            binding.empiricGraph.setBackgroundColor(Color.rgb(10, 20, 100))
         }
     }
 

@@ -1,4 +1,4 @@
-package com.asustuf.sprint00.dataclasses
+package com.asustuf.sprint00.model.dataclasses
 
 class Alphabet {
     companion object {

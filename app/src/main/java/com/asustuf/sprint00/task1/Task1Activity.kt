@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asustuf.sprint00.databinding.ActivityTask1Binding
 import com.asustuf.sprint00.task1.adapters.Task1SampleAdapter
-import com.asustuf.sprint00.dataclasses.Sample
+import com.asustuf.sprint00.model.dataclasses.Sample
 
 class Task1Activity : AppCompatActivity() {
     lateinit var task1Binding: ActivityTask1Binding
@@ -15,6 +15,7 @@ class Task1Activity : AppCompatActivity() {
         task1Binding = ActivityTask1Binding.inflate(layoutInflater)
         setContentView(task1Binding.root)
 
+        @Suppress("UNCHECKED_CAST")
         val samples = intent.getSerializableExtra("samples") as MutableList<Sample>
 
         task1Binding.task1ForSample.layoutManager = LinearLayoutManager(this)

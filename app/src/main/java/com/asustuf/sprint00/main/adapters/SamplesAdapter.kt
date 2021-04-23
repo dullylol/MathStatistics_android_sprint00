@@ -9,9 +9,9 @@ import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.asustuf.sprint00.databinding.SampleRvBinding
-import com.asustuf.sprint00.dataclasses.Alphabet.Companion.samplesNames
-import com.asustuf.sprint00.dataclasses.Sample
-import com.asustuf.sprint00.dataclasses.SampleBox
+import com.asustuf.sprint00.model.dataclasses.Alphabet.Companion.samplesNames
+import com.asustuf.sprint00.model.dataclasses.Sample
+import com.asustuf.sprint00.model.dataclasses.SampleBox
 import java.lang.NumberFormatException
 
 class SamplesAdapter(private val context: Context, samplesCount: Int = 2) :

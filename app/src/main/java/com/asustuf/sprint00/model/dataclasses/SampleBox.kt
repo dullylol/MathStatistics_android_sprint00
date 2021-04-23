@@ -1,4 +1,4 @@
-package com.asustuf.sprint00.dataclasses
+package com.asustuf.sprint00.model.dataclasses
 
 import android.widget.CheckBox
 import android.widget.EditText
