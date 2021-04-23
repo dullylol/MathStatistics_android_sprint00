@@ -46,6 +46,10 @@ class Task3SampleAdapter(private val samples: MutableList<Sample>) :
             binding.centralMoment4.text = "Central moment(4): ${sampleOperations.centralMoment4}"
             binding.asymmetry.text = "Asymmetry: ${sampleOperations.asymmetry}"
             binding.excess.text = "Excess: ${sampleOperations.excess}"
+            binding.correctedVariance.text =
+                "Corrected variance: ${sampleOperations.correctedVariance}"
+            binding.correctedStandardDeviation.text =
+                "Corrected standard deviation: ${sampleOperations.correctedStandardDeviation}"
         }
     }
 }

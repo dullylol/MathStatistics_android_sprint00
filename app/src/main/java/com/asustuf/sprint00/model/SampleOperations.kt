@@ -76,7 +76,15 @@ class SampleOperations(private val numbers: Array<Double>, private val accuracy:
     val centralMoment3 by lazy { roundTo(getCentralMoment(3), accuracy) }
     val centralMoment4 by lazy { roundTo(getCentralMoment(4), accuracy) }
     val asymmetry by lazy { roundTo(centralMoment3 / sampleStandardDeviation.pow(3), accuracy) }
-    val excess by lazy { roundTo(centralMoment4 / sampleStandardDeviation.pow(4) - 3, accuracy)}
+    val excess by lazy { roundTo(centralMoment4 / sampleStandardDeviation.pow(4) - 3, accuracy) }
+    val correctedVariance by lazy {
+        var correctVariance = 0.0
+        for (number in numbers) {
+            correctVariance += (number - sampleAverage).pow(2)
+        }
+        roundTo(correctVariance / (numbers.size - 1), accuracy)
+    }
+    val correctedStandardDeviation by lazy { roundTo(sqrt(correctedVariance), accuracy) }
 
     fun getNumbers() = numbers.copyOf()
     fun getCountsList() = countsList.toTypedArray()
