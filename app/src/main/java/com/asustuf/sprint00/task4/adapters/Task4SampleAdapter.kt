@@ -1,5 +1,6 @@
 package com.asustuf.sprint00.task4.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -27,9 +28,17 @@ class Task4SampleAdapter(private val samples: MutableList<Sample>) :
     class Task4SampleHolder(private val binding: Task4ForSampleRvBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(sample: Sample) {
             val sampleOperations = SampleOperations(sample.sampleNumbers.toTypedArray())
-
+            binding.momentsPointEstimateFirst.text =
+                "● Point estimate first(moments method): ${sampleOperations.momentsPointEstimateFirst}"
+            binding.momentsPointEstimateSecond.text =
+                "● Point estimate second(moments method): ${sampleOperations.momentsPointEstimateSecond}"
+            binding.similarityPointEstimateFirst.text =
+                "● Point estimate first(similarity method): ${sampleOperations.similarityPointEstimateFirst}"
+            binding.similarityPointEstimateSecond.text =
+                "● Point estimate second(similarity method): ${sampleOperations.similarityPointEstimateSecond}"
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.asustuf.sprint00.model
 
-import android.util.Log
 import kotlin.math.absoluteValue
 import kotlin.math.pow
 import kotlin.math.round
@@ -9,7 +8,6 @@ import kotlin.math.sqrt
 class SampleOperations(private val numbers: Array<Double>, private val accuracy: Int = 5) {
     private val numbersSet = numbers.toSortedSet()
     private val countsList = mutableListOf<Double>()
-
     init {
         numbersSet.forEach { numberOfSet ->
             var count = 0.0
@@ -21,10 +19,8 @@ class SampleOperations(private val numbers: Array<Double>, private val accuracy:
             countsList.add(count)
         }
     }
-
     private val sampleSize = numbers.size
     private val variationRow = numbers.sorted()
-
     private val _cumulativeFrequency: Array<Double> by lazy {
         val cumulativeFrequency = mutableListOf(countsList[0])
         for (i in 1 until countsList.size) {
@@ -47,11 +43,9 @@ class SampleOperations(private val numbers: Array<Double>, private val accuracy:
         }
         cumulativeRelativeFrequency.toTypedArray()
     }
-
     val cumulativeFrequency get() = _cumulativeFrequency.copyOf()
     val relativeFrequency get() = _relativeFrequency.copyOf()
     val cumulativeRelativeFrequency get() = _cumulativeRelativeFrequency.copyOf()
-
     val span by lazy { numbers.maxOrNull()!! - numbers.minOrNull()!! }
     val sampleAverage by lazy { roundTo(numbers.average(), accuracy) }
     val median by lazy {
@@ -70,7 +64,6 @@ class SampleOperations(private val numbers: Array<Double>, private val accuracy:
         selectiveVariance /= numbers.size
         roundTo(selectiveVariance, accuracy)
     }
-
     val sampleStandardDeviation by lazy { roundTo(sqrt(selectiveVariance), accuracy) }
     val coefficientOfVariation by lazy { roundTo(sampleStandardDeviation / sampleAverage, 2).absoluteValue }
     val centralMoment3 by lazy { roundTo(getCentralMoment(3), accuracy) }
@@ -86,25 +79,51 @@ class SampleOperations(private val numbers: Array<Double>, private val accuracy:
     }
     val correctedStandardDeviation by lazy { roundTo(sqrt(correctedVariance), accuracy) }
 
+    val momentsPointEstimateFirst get() = sampleAverage
+    val momentsPointEstimateSecond get() = selectiveVariance
+
+    val similarityPointEstimateFirst by lazy { numbers.sum() / numbers.size }
+    val similarityPointEstimateSecond by lazy {
+        var similarityPointEstimateSecond = 0.0
+        for (number in numbers) {
+            similarityPointEstimateSecond += (number - sampleAverage).pow(2)
+        }
+        similarityPointEstimateSecond / numbers.size
+    }
+
+    val expectationIntervalEstimate by lazy {
+        val intervalEstimate = getIntervalEstimate(sampleAverage)
+        "(${intervalEstimate[0]}; ${intervalEstimate[1]})"
+    }
+
+    val intervalEstimateOfStandardDeviation by lazy {
+        val intervalEstimate = getIntervalEstimate(sampleStandardDeviation)
+        "(${intervalEstimate[0]}; ${intervalEstimate[1]})"
+    }
+
     fun getNumbers() = numbers.copyOf()
     fun getCountsList() = countsList.toTypedArray()
     fun getNumbersSortedSet() = numbersSet.toTypedArray()
     fun getVariationRow() = variationRow.toTypedArray().copyOf()
 
+    private fun getIntervalEstimate(value: Double): Array<Double> {
+        val intervalEstimate = arrayOf(0.0, 0.0)
+        val z = 1.96
+        val intervalAccuracy = z * value / numbers.size
+        intervalEstimate[0] = sampleAverage - intervalAccuracy
+        intervalEstimate[1] = sampleAverage + intervalAccuracy
+        return intervalEstimate
+    }
+
     private fun getCentralMoment(degree: Int): Double {
         var centralMoment = 0.0
-        for (i in numbers.indices) {
-            centralMoment += (numbers[i] - sampleAverage).pow(degree) * getNumbersProbability(i)
+        for (i in numbersSet.indices) {
+            centralMoment += (numbersSet.elementAt(i) - sampleAverage).pow(degree) * countsList[i]
         }
         return centralMoment / numbers.size
     }
 
-    private fun getNumbersProbability(index: Int): Double {
-        return if (index in numbers.indices) {
-            countsList[numbersSet.indexOf(numbers[index])] / numbers.size
-        } else { 0.0 }
-    }
-
     private fun roundTo(number: Double, accuracy: Int) =
         round(number * 10.0.pow(accuracy)) / 10.0.pow(accuracy)
+
 }
