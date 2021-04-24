@@ -31,6 +31,7 @@ class Task4SampleAdapter(private val samples: MutableList<Sample>) :
         @SuppressLint("SetTextI18n")
         fun bind(sample: Sample) {
             val sampleOperations = SampleOperations(sample.sampleNumbers.toTypedArray())
+            binding.sampleName.text = sample.sampleName
             binding.momentsPointEstimateFirst.text =
                 "● Point estimate first(moments method): ${sampleOperations.momentsPointEstimateFirst}"
             binding.momentsPointEstimateSecond.text =

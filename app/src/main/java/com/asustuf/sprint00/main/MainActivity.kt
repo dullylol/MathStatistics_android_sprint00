@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.asustuf.sprint00.databinding.ActivityMainBinding
 import com.asustuf.sprint00.main.adapters.SamplesAdapter
 import com.asustuf.sprint00.task1.Task1Activity
 import com.asustuf.sprint00.task2.Task2Activity
 import com.asustuf.sprint00.task3.Task3Activity
 import com.asustuf.sprint00.task4.Task4Activity
+import com.asustuf.sprint00.task5.Task5Activity
 import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
@@ -110,7 +110,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainBinding.task5Btn.setOnClickListener {
-            //TODO do task
+            val checkedSamples = adapter.getCheckedSamples()
+
+            if (checkedSamples.isEmpty()) {
+                Toast.makeText(this, "Samples are empty!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val intent = Intent(this, Task5Activity::class.java)
+            intent.putExtra("samples", checkedSamples as Serializable)
+            startActivity(intent)
         }
 
     }

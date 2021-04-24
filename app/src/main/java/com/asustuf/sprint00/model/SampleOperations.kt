@@ -110,8 +110,8 @@ class SampleOperations(private val numbers: Array<Double>, private val accuracy:
         val intervalEstimate = arrayOf(0.0, 0.0)
         val z = 1.96
         val intervalAccuracy = z * value / numbers.size
-        intervalEstimate[0] = sampleAverage - intervalAccuracy
-        intervalEstimate[1] = sampleAverage + intervalAccuracy
+        intervalEstimate[0] = roundTo(sampleAverage - intervalAccuracy, accuracy)
+        intervalEstimate[1] = roundTo(sampleAverage + intervalAccuracy, accuracy)
         return intervalEstimate
     }
 
